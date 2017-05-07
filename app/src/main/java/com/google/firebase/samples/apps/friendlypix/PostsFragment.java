@@ -29,6 +29,8 @@ import android.view.ViewGroup;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -103,16 +105,35 @@ public class PostsFragment extends Fragment {
 
         switch (getArguments().getInt(KEY_TYPE)) {
             case TYPE_FEED:
-                Log.d(TAG, "Restoring recycler view position (all): " + mRecyclerViewPosition);
-                Query allPostsQuery = FirebaseUtil.getPostsRef();
-                mAdapter = getFirebaseRecyclerAdapter(allPostsQuery);
-                mAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
-                    @Override
-                    public void onItemRangeInserted(int positionStart, int itemCount) {
-                        super.onItemRangeInserted(positionStart, itemCount);
-                        // TODO: Refresh feed view.
-                    }
-                });
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if (user == null || user.isAnonymous()) {
+                    Query allPostsQuery = FirebaseUtil.getPostsRef().orderByChild("isPrivate").equalTo(false);
+//                    allPostsQuery.orderByChild("/isPrivate").equalTo(false);
+                    mAdapter = getFirebaseRecyclerAdapter(allPostsQuery);
+                    //Log.d("Debug", Float.toString(mAdapter));
+
+                    mAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+                        @Override
+                        public void onItemRangeInserted(int positionStart, int itemCount) {
+                            super.onItemRangeInserted(positionStart, itemCount);
+                            // TODO: Refresh feed view.
+                        }
+                    });
+                }
+                else {
+                    Log.d(TAG, "Restoring recycler view position (all): " + mRecyclerViewPosition);
+                    Query allPostsQuery = FirebaseUtil.getPostsRef();
+                    mAdapter = getFirebaseRecyclerAdapter(allPostsQuery);
+                    //Log.d("Debug", Float.toString(mAdapter));
+
+                    mAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+                        @Override
+                        public void onItemRangeInserted(int positionStart, int itemCount) {
+                            super.onItemRangeInserted(positionStart, itemCount);
+                            // TODO: Refresh feed view.
+                        }
+                    });
+                }
                 break;
             case TYPE_HOME:
                 Log.d(TAG, "Restoring recycler view position (following): " + mRecyclerViewPosition);
