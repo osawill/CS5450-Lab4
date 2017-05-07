@@ -100,6 +100,8 @@ public class ProfileActivity extends BaseActivity implements
         findViewById(R.id.launch_sign_in).setOnClickListener(this);
         findViewById(R.id.show_feeds_button).setOnClickListener(this);
         findViewById(R.id.sign_out_button).setOnClickListener(this);
+        findViewById(R.id.email_sign_in).setOnClickListener(this);
+        findViewById(R.id.email_sign_up).setOnClickListener(this);
     }
 
     @Override
@@ -117,6 +119,10 @@ public class ProfileActivity extends BaseActivity implements
             case R.id.show_feeds_button:
                 Intent feedsIntent = new Intent(this, FeedsActivity.class);
                 startActivity(feedsIntent);
+                break;
+            case R.id.email_sign_in:
+                break;
+            case R.id.email_sign_up:
                 break;
         }
     }

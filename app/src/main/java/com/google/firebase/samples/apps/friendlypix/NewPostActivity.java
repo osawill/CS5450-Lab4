@@ -33,6 +33,8 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.ToggleButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -60,6 +62,8 @@ public class NewPostActivity extends BaseActivity implements
     private Uri mFileUri;
     private Bitmap mResizedBitmap;
     private Bitmap mThumbnail;
+
+    private Boolean isPrivate = false;
 
     private NewPostUploadTaskFragment mTaskFragment;
 
@@ -128,7 +132,15 @@ public class NewPostActivity extends BaseActivity implements
                 String bitmapPath = "/" + FirebaseUtil.getCurrentUserId() + "/full/" + timestamp.toString() + "/";
                 String thumbnailPath = "/" + FirebaseUtil.getCurrentUserId() + "/thumb/" + timestamp.toString() + "/";
                 mTaskFragment.uploadPost(mResizedBitmap, bitmapPath, mThumbnail, thumbnailPath, mFileUri.getLastPathSegment(),
-                        postText);
+                        postText, isPrivate);
+            }
+        });
+
+        ToggleButton toggle = (ToggleButton) findViewById(R.id.toggle_private);
+        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                isPrivate = isChecked;
+                Log.d("ToggleValue", isPrivate? "True" : "False");
             }
         });
     }

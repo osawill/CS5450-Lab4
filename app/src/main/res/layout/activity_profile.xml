@@ -37,9 +37,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingBottom="@dimen/activity_vertical_margin"
@@ -55,52 +53,103 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="visible">
+
             <Button
                 android:id="@+id/launch_sign_in"
+                style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
                 android:text="Google Sign-In"
-                style="@style/Widget.AppCompat.Button.Colored"/>
+                android:layout_below="@+id/email_sign_in"
+                android:layout_alignEnd="@+id/pass_input"
+                android:layout_marginTop="17dp"
+                android:layout_alignStart="@+id/pass_input" />
+
+            <EditText
+                android:id="@+id/pass_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="91dp"
+                android:ems="10"
+                android:hint="Password"
+                android:inputType="textPassword" />
+
+            <Button
+                android:id="@+id/email_sign_in"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/pass_input"
+                android:layout_marginTop="26dp"
+                android:text="Login"
+                android:layout_alignEnd="@+id/launch_sign_in"
+                android:layout_alignStart="@+id/pass_input" />
+
+            <Button
+                android:id="@+id/email_sign_up"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/launch_sign_in"
+                android:layout_alignParentBottom="true"
+                android:layout_alignStart="@+id/email_sign_in"
+                android:layout_marginBottom="83dp"
+                android:text="Sign-up" />
+
+            <EditText
+                android:id="@+id/email_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="32dp"
+                android:ems="10"
+                android:hint="Email"
+                android:inputType="textEmailAddress" />
 
         </RelativeLayout>
 
         <LinearLayout
-            android:orientation="vertical"
             android:id="@+id/profile"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerHorizontal="true"
             android:gravity="center_horizontal"
+            android:orientation="vertical"
             android:visibility="gone">
+
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profile_user_photo"
                 android:layout_width="@dimen/profile_user_photo_size"
                 android:layout_height="@dimen/profile_user_photo_size"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="30dp"/>
+                android:layout_marginBottom="30dp"
+                android:layout_marginTop="30dp" />
+
             <TextView
                 android:id="@+id/profile_user_name"
+                style="@style/TextAppearance.AppCompat.Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:textStyle="bold"
                 android:textSize="30sp"
-                style="@style/TextAppearance.AppCompat.Title"/>
+                android:textStyle="bold" />
+
             <Button
                 android:id="@+id/show_feeds_button"
+                style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:text="@string/show_feed_button_text"
-                style="@style/Widget.AppCompat.Button.Colored"/>
+                android:text="@string/show_feed_button_text" />
+
             <Button
                 android:id="@+id/sign_out_button"
+                style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:text="@string/sign_out_button_text"
-                style="@style/Widget.AppCompat.Button.Colored"/>
+                android:text="@string/sign_out_button_text" />
         </LinearLayout>
+
     </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>

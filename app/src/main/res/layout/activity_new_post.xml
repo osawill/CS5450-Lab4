@@ -34,12 +34,22 @@
         android:layout_height="120dp"
         android:id="@+id/new_post_text"
         android:hint="Describe your post" />
+
     <Button
-        android:layout_width="300dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_height="wrap_content"
         android:id="@+id/new_post_submit"
-        android:text="SUBMIT"
-        style="@style/Widget.AppCompat.Button.Colored" />
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="299dp"
+        android:layout_height="38dp"
+        android:layout_gravity="center_horizontal"
+        android:text="SUBMIT" />
+
+    <ToggleButton
+        android:id="@+id/toggle_private"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checked="false"
+        android:text="ToggleButton"
+        android:textOff="Public"
+        android:textOn="Private" />
 
 </LinearLayout>

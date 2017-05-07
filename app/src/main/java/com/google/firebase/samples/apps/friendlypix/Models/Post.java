@@ -26,12 +26,13 @@ public class Post {
     private String text;
     private Object timestamp;
     private String full_storage_uri;
+    private Boolean isPrivate;
 
     public Post() {
         // empty default constructor, necessary for Firebase to be able to deserialize blog posts
     }
 
-    public Post(Author author, String full_url, String full_storage_uri, String thumb_url, String thumb_storage_uri, String text, Object timestamp) {
+    public Post(Author author, String full_url, String full_storage_uri, String thumb_url, String thumb_storage_uri, String text, Object timestamp, Boolean isPrivate) {
         this.author = author;
         this.full_url = full_url;
         this.text = text;
@@ -39,6 +40,7 @@ public class Post {
         this.thumb_storage_uri = thumb_storage_uri;
         this.thumb_url = thumb_url;
         this.full_storage_uri = full_storage_uri;
+        this.isPrivate = isPrivate;
     }
 
     public Author getAuthor() {
@@ -69,4 +71,6 @@ public class Post {
     public String getFull_storage_uri() {
         return full_storage_uri;
     }
+
+    public Boolean getIsPrivate() {return isPrivate; }
 }

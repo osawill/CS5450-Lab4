@@ -115,8 +115,8 @@ public class NewPostUploadTaskFragment extends Fragment {
     }
 
     public void uploadPost(Bitmap bitmap, String inBitmapPath, Bitmap thumbnail, String inThumbnailPath,
-                           String inFileName, String inPostText) {
-        UploadPostTask uploadTask = new UploadPostTask(bitmap, inBitmapPath, thumbnail, inThumbnailPath, inFileName, inPostText);
+                           String inFileName, String inPostText, Boolean isPrivate) {
+        UploadPostTask uploadTask = new UploadPostTask(bitmap, inBitmapPath, thumbnail, inThumbnailPath, inFileName, inPostText, isPrivate);
         uploadTask.execute();
     }
 
@@ -127,15 +127,17 @@ public class NewPostUploadTaskFragment extends Fragment {
         private String fileName;
         private String bitmapPath;
         private String thumbnailPath;
+        private Boolean isPrivate;
 
         public UploadPostTask(Bitmap bitmap, String inBitmapPath, Bitmap thumbnail, String inThumbnailPath,
-                              String inFileName, String inPostText) {
+                              String inFileName, String inPostText, Boolean inPrivate) {
             bitmapReference = new WeakReference<Bitmap>(bitmap);
             thumbnailReference = new WeakReference<Bitmap>(thumbnail);
             postText = inPostText;
             fileName = inFileName;
             bitmapPath = inBitmapPath;
             thumbnailPath = inThumbnailPath;
+            isPrivate = inPrivate;
         }
 
         @Override
@@ -187,7 +189,7 @@ public class NewPostUploadTaskFragment extends Fragment {
                                 return;
                             }
                             Post newPost = new Post(author, fullSizeUrl.toString(), fullSizeRef.toString(),
-                                    thumbnailUrl.toString(), thumbnailRef.toString(), postText, ServerValue.TIMESTAMP);
+                                    thumbnailUrl.toString(), thumbnailRef.toString(), postText, ServerValue.TIMESTAMP, isPrivate);
 
                             Map<String, Object> updatedUserData = new HashMap<>();
                             updatedUserData.put(FirebaseUtil.getPeoplePath() + author.getUid() + "/posts/"
